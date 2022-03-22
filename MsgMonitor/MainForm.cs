@@ -732,11 +732,20 @@ namespace MsgMoniter
 
         private void 附加进程ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process process = new Process();
-            process.StartInfo.FileName = "MemToExe.exe";
+           
             ProcessForm processForm = new ProcessForm();
             if (processForm.ShowDialog() == DialogResult.OK)
             {
+                Process process = new Process();
+
+                if (processForm.IsWin32)
+                {
+                    process.StartInfo.FileName = "MemToExe.exe";
+                }else
+                {
+                    process.StartInfo.FileName = "MemToExe64.exe";
+                }
+
                 process.StartInfo.Arguments = processForm.ProcessId;
                 process.Start();
             }

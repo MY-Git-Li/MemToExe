@@ -6,6 +6,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -13,7 +14,12 @@ namespace MsgMonitor
 {
     public partial class ProcessForm : Form
     {
+        [DllImport("kernel32.dll")]
+        extern  static public  bool IsWow64Process( IntPtr hProcess, out bool Wow64Process);
+
         public string ProcessId { get; set; }
+
+        public bool IsWin32;
 
         public ProcessForm()
         {
@@ -48,6 +54,8 @@ namespace MsgMonitor
             if (listView1.SelectedItems.Count == 1)
             {
                 ProcessId = listView1.SelectedItems[0].SubItems[0].Text;
+                var dd = Process.GetProcessById(Int32.Parse(ProcessId));
+                IsWow64Process(dd.Handle,out IsWin32);
                 DialogResult = DialogResult.OK;
                 Close();
             }

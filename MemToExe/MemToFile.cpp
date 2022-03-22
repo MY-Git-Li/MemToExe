@@ -13,7 +13,7 @@ int main(int argc, char** argv)
 			{
 				char filepath[MAX_PATH];
 				lstrcpy(filepath, argv[0]);
-				GetFileFullPath(filepath, "mtfcore.dll");
+				GetFileFullPath(filepath, "mtfcore64.dll");
 				InjectDll(hProcess, filepath);
 				CloseHandle(hProcess);
 			}
@@ -29,7 +29,7 @@ int main(int argc, char** argv)
 			{
 				char filepath[MAX_PATH];
 				lstrcpy(filepath, argv[0]);
-				GetFileFullPath(filepath, "mtfcore.dll");
+				GetFileFullPath(filepath, "mtfcore64.dll");
 				InjectDll(stProcessInfo.hProcess, filepath);
 				CloseHandle(stProcessInfo.hProcess);
 				CloseHandle(stProcessInfo.hThread);
